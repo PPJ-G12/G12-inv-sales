@@ -5,11 +5,11 @@ services:
     image: postgres:latest
     container_name: posgres-docker
     environment:
-      POSTGRES_USER: pirribarra
-      POSTGRES_PASSWORD: Malik.412515
-      POSTGRES_DB: user-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: usersdb
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 

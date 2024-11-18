@@ -6,11 +6,11 @@ import { ProfileUsersModule } from './profile-users/profile-users.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'pirribarra',
-      password: 'Malik.412515',
-      database: 'user-db',
+      host: 'users-db',
+      port: 5434,
+      username: 'postgres',
+      password: '123456',
+      database: 'usersdb',
       autoLoadEntities: true,
       synchronize: true,
     }),

@@ -1,16 +1,31 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { Logger, ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { envs } from "./config";
+import { MicroserviceOptions, Transport } from "@nestjs/microservices";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const logger = new Logger("UserMS-Main");
 
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true, // Ignora propiedades no definidas en los DTOs
-    forbidNonWhitelisted: true, // Lanza error si el cliente envía propiedades no definidas
-    transform: true, // Transforma automáticamente los datos al tipo esperado
-  }));
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AppModule,
+    {
+      transport: Transport.NATS,
+      options: {
+        servers: envs.natsServers
+      }
+    }
+  );
 
-  await app.listen(3000); // Puerto de la aplicación
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true
+    })
+  );
+
+  await app.listen();
+  logger.log(`Users Microservice running on port ${envs.port}`);
 }
+
 bootstrap();

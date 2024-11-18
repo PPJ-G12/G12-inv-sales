@@ -2,27 +2,28 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ProfileUsersService } from './profile-users.service';
 import { CreateProfileUserDto } from './dto/create-profile-user.dto';
 import { UpdateProfileUserDto } from './dto/update-profile-user.dto';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller('users')
 export class ProfileUsersController {
   constructor(private readonly usersService: ProfileUsersService) {}
 
-  @Post()
+  @MessagePattern("createUser")
   create(@Body() createUserDto: CreateProfileUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @Get()
+  @MessagePattern("findAllUsers")
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
+  @MessagePattern("findUserById")
   findOne(@Param('id') id: number) {
     return this.usersService.findOne(+id);
   }
 
-  @Patch(':id')
+  @MessagePattern("updateUser")
   update(
     @Param('id') id: number,
     @Body() updateUserDto: UpdateProfileUserDto,
@@ -30,7 +31,7 @@ export class ProfileUsersController {
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
+  @MessagePattern("deleteUser")
   remove(@Param('id') id: number) {
     return this.usersService.remove(+id);
   }
