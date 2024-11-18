@@ -3,32 +3,35 @@ import { ProfileUsersService } from './profile-users.service';
 import { CreateProfileUserDto } from './dto/create-profile-user.dto';
 import { UpdateProfileUserDto } from './dto/update-profile-user.dto';
 
-@Controller('profile-users')
+@Controller('users')
 export class ProfileUsersController {
-  constructor(private readonly profileUsersService: ProfileUsersService) {}
+  constructor(private readonly usersService: ProfileUsersService) {}
 
   @Post()
-  create(@Body() createProfileUserDto: CreateProfileUserDto) {
-    return this.profileUsersService.create(createProfileUserDto);
+  create(@Body() createUserDto: CreateProfileUserDto) {
+    return this.usersService.create(createUserDto);
   }
 
   @Get()
   findAll() {
-    return this.profileUsersService.findAll();
+    return this.usersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.profileUsersService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.usersService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProfileUserDto: UpdateProfileUserDto) {
-    return this.profileUsersService.update(+id, updateProfileUserDto);
+  update(
+    @Param('id') id: number,
+    @Body() updateUserDto: UpdateProfileUserDto,
+  ) {
+    return this.usersService.update(+id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.profileUsersService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.usersService.remove(+id);
   }
 }
