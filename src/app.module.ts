@@ -7,7 +7,7 @@ import { ProfileUsersModule } from './profile-users/profile-users.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'users-db',
-      port: 5434,
+      port: 5432,
       username: 'postgres',
       password: '123456',
       database: 'usersdb',

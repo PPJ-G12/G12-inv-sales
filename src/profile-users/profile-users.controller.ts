@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ProfileUsersService } from './profile-users.service';
-import { CreateProfileUserDto } from './dto/create-profile-user.dto';
-import { UpdateProfileUserDto } from './dto/update-profile-user.dto';
-import { MessagePattern } from '@nestjs/microservices';
+import {Body, Controller, Param} from '@nestjs/common';
+import {ProfileUsersService} from './profile-users.service';
+import {CreateProfileUserDto} from './dto/create-profile-user.dto';
+import {UpdateProfileUserDto} from './dto/update-profile-user.dto';
+import {MessagePattern} from '@nestjs/microservices';
 
-@Controller('users')
+@Controller()
 export class ProfileUsersController {
   constructor(private readonly usersService: ProfileUsersService) {}
 

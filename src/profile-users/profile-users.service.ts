@@ -9,7 +9,7 @@ import { UpdateProfileUserDto } from './dto/update-profile-user.dto';
 export class ProfileUsersService {
   constructor(
     @InjectRepository(ProfileUser)
-    private readonly userRepository: Repository<ProfileUser>,
+    private userRepository: Repository<ProfileUser>,
   ) {}
 
   async create(createUserDto: CreateProfileUserDto): Promise<ProfileUser> {
