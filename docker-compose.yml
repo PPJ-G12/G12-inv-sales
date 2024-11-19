@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  users-db:
+    image: postgres:latest
+    container_name: posgres-docker
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: usersdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
