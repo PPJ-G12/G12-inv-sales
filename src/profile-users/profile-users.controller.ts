@@ -2,7 +2,7 @@ import {Body, Controller, Param} from '@nestjs/common';
 import {ProfileUsersService} from './profile-users.service';
 import {CreateProfileUserDto} from './dto/create-profile-user.dto';
 import {UpdateProfileUserDto} from './dto/update-profile-user.dto';
-import {MessagePattern} from '@nestjs/microservices';
+import {MessagePattern, Payload} from '@nestjs/microservices';
 
 @Controller()
 export class ProfileUsersController {
@@ -19,8 +19,9 @@ export class ProfileUsersController {
   }
 
   @MessagePattern("findUserById")
-  findOne(@Param('id') id: number) {
-    return this.usersService.findOne(+id);
+  findOne(@Payload("id") id) {
+    console.log("user id: " + id)
+    return this.usersService.findOne(id);
   }
 
   @MessagePattern("updateUser")
